@@ -1,0 +1,76 @@
+# 🎯 .gitattributes - Configurações Git
+# Sistema de Transcrição Local de Vídeos
+
+# =============================================================================
+# TRATAMENTO DE LINHA
+# =============================================================================
+
+# Normalizar line endings para LF em todos os arquivos de texto
+* text=auto
+
+# Arquivos Python sempre com LF
+*.py text eol=lf
+
+# Shell scripts sempre com LF (importante para WSL/Linux)
+*.sh text eol=lf
+
+# Markdown sempre com LF
+*.md text eol=lf
+
+# JSON sempre com LF
+*.json text eol=lf
+
+# YAML sempre com LF
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# =============================================================================
+# ARQUIVOS BINÁRIOS
+# =============================================================================
+
+# Vídeos (binários - não fazer diff)
+*.mp4 binary
+*.avi binary
+*.mov binary
+*.mkv binary
+*.flv binary
+*.wmv binary
+*.webm binary
+
+# Áudios (binários - não fazer diff)
+*.mp3 binary
+*.wav binary
+*.m4a binary
+*.flac binary
+*.ogg binary
+
+# Imagens (binários - não fazer diff)
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+
+# Modelos (binários - não fazer diff)
+*.pt binary
+*.pth binary
+*.onnx binary
+
+# =============================================================================
+# LINGUÍSTICA DO REPOSITÓRIO (Para estatísticas do GitHub)
+# =============================================================================
+
+# Marcar como documentação (não conta nas stats de linguagem)
+*.md linguist-documentation
+
+# Marcar exemplos como scripts shell
+exemplos/*.sh linguist-language=Shell
+
+# =============================================================================
+# DIFF PERSONALIZADO
+# =============================================================================
+
+# Para arquivos JSON, usar diff mais legível
+*.json diff=json
+
+# Para notebooks Jupyter (se usar futuramente)
+*.ipynb diff=jupyternotebook

@@ -1,0 +1,20 @@
+# 🎯 Dependências do Sistema de Transcrição Local
+# Instalação: pip install -r requirements.txt
+
+# Core
+openai-whisper>=20231117
+ffmpeg-python>=0.2.0
+
+# Opcional: Acelerar com GPU NVIDIA
+# Descomente as linhas abaixo se você tiver GPU NVIDIA:
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch>=2.0.0
+torchaudio>=2.0.0
+
+# Dependências indiretas (instaladas automaticamente)
+# numpy
+# torch
+# tqdm
+# more-itertools
+# tiktoken
+# numba

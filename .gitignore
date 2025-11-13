@@ -1,0 +1,274 @@
+# 🎯 .gitignore - Sistema de Transcrição Local de Vídeos
+# Criado por Diego Sottani
+
+# =============================================================================
+# ARQUIVOS DE MÍDIA (NUNCA commitar vídeos/áudios - são grandes!)
+# =============================================================================
+
+# Vídeos
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+*.webm
+*.m4v
+*.mpg
+*.mpeg
+
+# Áudios
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.ogg
+*.aac
+*.wma
+
+# Imagens (caso extraia frames)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+
+# =============================================================================
+# ARQUIVOS DE SAÍDA (Transcrições e processamentos)
+# =============================================================================
+
+# Pastas de transcrições (podem ser grandes)
+transcricoes/
+transcricoes_*/
+*_transcricoes/
+output/
+outputs/
+saida/
+resultados/
+
+# Arquivos de transcrição individuais
+*.transcricao.txt
+*.transcricao.json
+*.transcricao.md
+
+# Pastas de processamento
+chunks/
+audios/
+audios_*/
+*_audios/
+videos_processados/
+temp/
+tmp/
+
+# Arquivos temporários de processamento
+*.tmp
+*.temp
+
+# =============================================================================
+# PYTHON
+# =============================================================================
+
+# Ambiente Virtual
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribuição / Packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Testes
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# =============================================================================
+# MODELOS WHISPER (Baixados automaticamente - NÃO commitar)
+# =============================================================================
+
+# Cache de modelos Whisper (podem ser grandes - até 1.5GB)
+*.pt
+models/
+.cache/
+~/.cache/whisper/
+
+# =============================================================================
+# IDEs e EDITORES
+# =============================================================================
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# =============================================================================
+# SISTEMA OPERACIONAL
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# =============================================================================
+# LOGS E DATABASES
+# =============================================================================
+
+*.log
+*.sqlite
+*.db
+
+# =============================================================================
+# CONFIGURAÇÕES LOCAIS E SECRETS
+# =============================================================================
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# Configurações locais
+config.local.py
+settings.local.py
+*.local.json
+
+# Credenciais (se adicionar APIs futuramente)
+credentials.json
+secrets.json
+*.key
+*.pem
+
+# =============================================================================
+# BACKUPS E ARQUIVOS TEMPORÁRIOS
+# =============================================================================
+
+*.bak
+*.backup
+*.old
+backup_*/
+backups/
+
+# =============================================================================
+# JUPYTER NOTEBOOKS (caso use)
+# =============================================================================
+
+.ipynb_checkpoints/
+*.ipynb
+
+# =============================================================================
+# DOCUMENTAÇÃO GERADA
+# =============================================================================
+
+docs/_build/
+site/
+
+# =============================================================================
+# PROJETOS / DADOS PESSOAIS
+# =============================================================================
+
+# Pasta de projetos pessoais (cada pessoa tem seus próprios vídeos)
+projetos/
+meus_videos/
+minhas_transcricoes/
+
+# Arquivos de exemplo que você criou para testar
+exemplo_*.mp4
+teste_*.mp4
+demo_*.mp4
+
+# =============================================================================
+# ARQUIVOS ESPECÍFICOS DO PROJETO
+# =============================================================================
+
+# Se você criar scripts de teste/desenvolvimento
+dev_*.py
+test_*.py
+experimento_*.py
+
+# Anotações pessoais
+NOTAS.md
+TODO.md
+IDEIAS.md
+
+# =============================================================================
+# EXCEÇÕES (Forçar commit de arquivos importantes)
+# =============================================================================
+
+# Garantir que documentação seja commitada
+!README.md
+!GUIA_USO.md
+!CHEATSHEET.md
+!INICIO_AQUI.md
+
+# Garantir que requirements seja commitado
+!requirements.txt
+
+# Garantir que scripts principais sejam commitados
+!transcricao_videos.py
+!preprocessar_videos.py
+!instalar.sh
+
+# Garantir que exemplos sejam commitados
+!exemplos/
+!exemplos/*.sh
+
+# Pastas vazias que devem existir (criar .gitkeep nelas)
+!exemplos/.gitkeep
