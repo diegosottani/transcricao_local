@@ -21,8 +21,8 @@ transcricao_local/
 │   ├── 2_transcricao_lote.sh
 │   ├── 3_workflow_completo.sh
 │   └── 4_videos_longos.sh
-├── videos/                  # Pasta para videos de entrada (gitignore)
-├── transcricoes/            # Pasta para saidas (gitignore)
+├── input/                   # Pasta para videos de entrada (gitignore)
+├── output/                  # Pasta para saidas (gitignore)
 └── venv/                    # Ambiente virtual Python (gitignore)
 ```
 
@@ -127,7 +127,7 @@ Para cada video transcrito, sao gerados 3 arquivos:
 ## Arquivos Ignorados pelo Git
 
 - `venv/` - Ambiente virtual
-- `videos/` - Videos de entrada
-- `transcricoes/` - Saidas geradas
+- `input/` - Videos de entrada
+- `output/` - Saidas geradas
 - `*.mp4`, `*.wav`, etc - Arquivos de midia
 - `*.pt` - Modelos Whisper baixados

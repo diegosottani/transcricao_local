@@ -88,8 +88,8 @@ echo "📁 Criando estrutura de diretórios..."
 
 # Criar diretórios necessários
 mkdir -p exemplos
-mkdir -p videos
-mkdir -p transcricoes
+mkdir -p input
+mkdir -p output
 
 sucesso "Diretórios criados"
 
@@ -173,17 +173,17 @@ echo "   source venv/bin/activate  # Linux/Mac"
 echo "   venv\\Scripts\\activate    # Windows"
 echo ""
 echo "2️⃣  Transcrever seu primeiro vídeo:"
-echo "   python transcricao_videos.py --input video.mp4 --output transcricoes/"
+echo "   python transcrever.py --input video.mp4 --output output/"
 echo ""
 echo "3️⃣  Ver todos os exemplos:"
 echo "   ls exemplos/"
 echo ""
-echo "4️⃣  Ler o guia completo:"
-echo "   cat GUIA_USO.md"
+echo "4️⃣  Ler a documentação:"
+echo "   cat README.md"
 echo ""
 echo "📚 Recursos:"
-echo "   README.md    - Visão geral do projeto"
-echo "   GUIA_USO.md  - Guia detalhado de uso"
+echo "   README.md    - Documentação completa"
+echo "   CLAUDE.md    - Guia para desenvolvimento"
 echo "   exemplos/    - Scripts de exemplo prontos"
 echo ""
 echo "💡 Dica: Comece com o modelo 'base' para testes rápidos,"

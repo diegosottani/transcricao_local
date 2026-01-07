@@ -55,19 +55,19 @@ Ou use o instalador automatico: `./instalar.sh`
 ### Transcrever um video
 
 ```bash
-python transcrever.py -i video.mp4 -o transcricoes/
+python transcrever.py -i video.mp4 -o output/
 ```
 
 ### Transcrever pasta inteira
 
 ```bash
-python transcrever.py -i videos/ -o transcricoes/
+python transcrever.py -i input/ -o output/
 ```
 
 ### Com modelo mais preciso (recomendado para portugues)
 
 ```bash
-python transcrever.py -i video.mp4 -o transcricoes/ -m medium
+python transcrever.py -i video.mp4 -o output/ -m medium
 ```
 
 ### Saida gerada
@@ -132,8 +132,8 @@ python preprocessar_videos.py dividir -i video_longo.mp4 -o chunks/ -d 20
 
 ```bash
 python transcrever.py \
-  -i "Curso Python/videos/" \
-  -o "Curso Python/transcricoes/" \
+  -i "Curso Python/input/" \
+  -o "Curso Python/output/" \
   -m medium
 ```
 
@@ -144,10 +144,10 @@ python transcrever.py \
 python preprocessar_videos.py dividir -i video_3h.mp4 -o chunks/ -d 30
 
 # 2. Transcrever todas as partes
-python transcrever.py -i chunks/ -o transcricoes/ -m medium
+python transcrever.py -i chunks/ -o output/ -m medium
 
 # 3. Copiar para Obsidian
-cp transcricoes/*.md ~/Obsidian/MeuVault/
+cp output/*.md ~/Obsidian/MeuVault/
 ```
 
 ### Transcrever podcast
@@ -225,7 +225,7 @@ O Whisper detectara automaticamente a GPU.
 
 ```bash
 python transcrever.py -i video.mp4 -o out/           # Um video
-python transcrever.py -i videos/ -o out/             # Pasta
+python transcrever.py -i input/ -o out/              # Pasta
 python transcrever.py -i video.mp4 -o out/ -m medium # Modelo
 python transcrever.py -i video.mp4 -o out/ -l en     # Idioma
 ```

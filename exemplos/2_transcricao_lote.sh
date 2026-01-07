@@ -9,15 +9,15 @@ echo "================================"
 source ../venv/bin/activate
 
 # Criar diretórios se não existirem
-mkdir -p videos
-mkdir -p transcricoes
+mkdir -p input
+mkdir -p output
 
 # Transcrever todos os vídeos da pasta
-python ../transcricao_videos.py \
-  --input "videos/" \
-  --output "transcricoes/" \
+python ../transcrever.py \
+  --input "input/" \
+  --output "output/" \
   --modelo base \
   --idioma pt
 
 echo "✅ Todos os vídeos foram transcritos!"
-echo "📁 Verifique a pasta 'transcricoes/'"
+echo "📁 Verifique a pasta 'output/'"

@@ -38,11 +38,13 @@
 # ARQUIVOS DE SAÍDA (Transcrições e processamentos)
 # =============================================================================
 
-# Pastas de transcrições (podem ser grandes)
-transcricoes/
+# Pasta de entrada (arquivos de mídia)
+input/
+
+# Pastas de saída (podem ser grandes)
+output/
 transcricoes_*/
 *_transcricoes/
-output/
 outputs/
 saida/
 resultados/
@@ -254,15 +256,14 @@ IDEIAS.md
 
 # Garantir que documentação seja commitada
 !README.md
-!GUIA_USO.md
-!CHEATSHEET.md
-!INICIO_AQUI.md
+!CLAUDE.md
+!CONTRIBUTING.md
 
 # Garantir que requirements seja commitado
 !requirements.txt
 
 # Garantir que scripts principais sejam commitados
-!transcricao_videos.py
+!transcrever.py
 !preprocessar_videos.py
 !instalar.sh
 

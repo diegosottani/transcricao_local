@@ -9,11 +9,11 @@ echo "================================"
 source ../venv/bin/activate
 
 # Transcrever vídeo único
-python ../transcricao_videos.py \
+python ../transcrever.py \
   --input "seu_video.mp4" \
-  --output "transcricoes/" \
+  --output "output/" \
   --modelo base \
   --idioma pt
 
 echo "✅ Transcrição concluída!"
-echo "📁 Verifique a pasta 'transcricoes/'"
+echo "📁 Verifique a pasta 'output/'"

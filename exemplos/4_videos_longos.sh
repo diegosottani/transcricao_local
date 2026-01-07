@@ -27,7 +27,7 @@ python ../preprocessar_videos.py dividir \
 
 echo ""
 echo "📝 ETAPA 2: Transcrevendo todos os chunks..."
-python ../transcricao_videos.py \
+python ../transcrever.py \
   --input chunks/ \
   --output transcricoes_parciais/ \
   --modelo $MODELO

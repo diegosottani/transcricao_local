@@ -5,7 +5,7 @@ Autor: Diego Sottani
 Descrição: Transcreve vídeos longos usando Whisper local, com timestamps e formatação para Obsidian
 
 Uso:
-    python transcricao_videos.py --input pasta_videos --output pasta_saida --modelo base
+    python transcrever.py --input pasta_videos --output pasta_saida --modelo base
 """
 
 import whisper
@@ -234,16 +234,16 @@ def main():
 Exemplos de uso:
 
   # Transcrever um único vídeo
-  python transcricao_videos.py --input video.mp4 --output transcricoes/
+  python transcrever.py --input video.mp4 --output output/
 
   # Transcrever todos os vídeos de uma pasta
-  python transcricao_videos.py --input pasta_videos/ --output transcricoes/
+  python transcrever.py --input pasta_videos/ --output output/
 
   # Usar modelo mais preciso
-  python transcricao_videos.py --input video.mp4 --output transcricoes/ --modelo medium
+  python transcrever.py --input video.mp4 --output output/ --modelo medium
 
   # Transcrever em inglês
-  python transcricao_videos.py --input video.mp4 --output transcricoes/ --idioma en
+  python transcrever.py --input video.mp4 --output output/ --idioma en
 
 Modelos disponíveis:
   tiny   - 39MB  - Mais rápido, menos preciso

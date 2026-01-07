@@ -1,4 +1,4 @@
-# Pasta de arquivos de temporários.
+# Pasta de arquivos de temporários
 Insira aqui os arquivos que precisam ser transcritos (audio/video).
 
 ## Formatos de áudio suportados
@@ -18,4 +18,4 @@ Insira aqui os arquivos que precisam ser transcritos (audio/video).
   - .webm
 
 ## Exemplo de uso:
-python transcricao_videos.py -i audio.mp3 -o transcricoes/ -m base
+python transcrever.py -i input/ -o output/teste -m medium -l pt

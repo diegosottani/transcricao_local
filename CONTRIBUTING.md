@@ -115,7 +115,7 @@ Antes de enviar PR:
 ./instalar.sh
 
 # Testar script principal
-python transcricao_videos.py -i teste.mp4 -o out/ -m tiny
+python transcrever.py -i teste.mp4 -o out/ -m tiny
 
 # Testar preprocessamento
 python preprocessar_videos.py info -i teste.mp4
@@ -128,9 +128,8 @@ python preprocessar_videos.py info -i teste.mp4
 Se adicionar funcionalidade:
 
 1. Atualizar `README.md`
-2. Atualizar `GUIA_USO.md` (se necessário)
+2. Atualizar `CLAUDE.md` (se necessário)
 3. Adicionar exemplo em `exemplos/` (se aplicável)
-4. Atualizar `CHEATSHEET.md` com novos comandos
 
 ---
 

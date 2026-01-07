@@ -9,7 +9,7 @@ echo "=============================="
 source ../venv/bin/activate
 
 # Criar estrutura de diretórios
-mkdir -p videos
+mkdir -p input
 mkdir -p 1_audios_originais
 mkdir -p 2_audios_limpos
 mkdir -p 3_transcricoes
@@ -17,12 +17,12 @@ mkdir -p 4_obsidian
 
 echo ""
 echo "📊 ETAPA 1: Analisando vídeos..."
-python ../preprocessar_videos.py info --input videos/
+python ../preprocessar_videos.py info --input input/
 
 echo ""
 echo "🎵 ETAPA 2: Extraindo áudios..."
 python ../preprocessar_videos.py extrair \
-  --input videos/ \
+  --input input/ \
   --output 1_audios_originais/
 
 echo ""
@@ -33,7 +33,7 @@ python ../preprocessar_videos.py limpar \
 
 echo ""
 echo "📝 ETAPA 4: Transcrevendo com modelo preciso..."
-python ../transcricao_videos.py \
+python ../transcrever.py \
   --input 2_audios_limpos/ \
   --output 3_transcricoes/ \
   --modelo medium \
@@ -46,7 +46,7 @@ cp 3_transcricoes/*.md 4_obsidian/
 echo ""
 echo "✅ Workflow completo concluído!"
 echo "📁 Estrutura final:"
-echo "   videos/              - Vídeos originais"
+echo "   input/               - Vídeos originais"
 echo "   1_audios_originais/  - Áudios extraídos"
 echo "   2_audios_limpos/     - Áudios normalizados"
 echo "   3_transcricoes/      - Transcrições (.md, .txt, .json)"
