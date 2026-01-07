@@ -1,408 +1,266 @@
-# 🎯 Sistema de Transcrição Local de Vídeos
+# Sistema de Transcricao Local de Videos
 
-> **Transcreva vídeos longos localmente usando Whisper - Zero custos de API**  
-> Criado por Diego Sottani - Arquitetura da Clareza
+> Transcreva videos localmente usando Whisper - Zero custos de API
 
----
-
-## 🌟 Visão Geral
-
-Sistema completo para transcrever vídeos de qualquer duração usando **Whisper da OpenAI** rodando 100% localmente no seu computador.
-
-### ✨ Características
-
-- ✅ **100% Local** - Sem custos de API ou envio de dados para nuvem
-- ✅ **Múltiplos Formatos** - Suporta MP4, AVI, MOV, MKV, MP3, WAV e mais
-- ✅ **Processamento em Lote** - Transcreva múltiplos vídeos automaticamente
-- ✅ **Timestamps Precisos** - Cada segmento com marcação de tempo
-- ✅ **Markdown para Obsidian** - Formatação otimizada para second brain
-- ✅ **Metadados Completos** - Duração, idioma, modelo usado, etc.
-- ✅ **Múltiplos Idiomas** - Português, Inglês, Espanhol e 90+ idiomas
+Criado por Diego Sottani
 
 ---
 
-## 🚀 Quick Start (5 minutos)
+## O que faz
 
-### 1. Instalação Rápida
+Sistema completo para transcrever videos de qualquer duracao usando **Whisper da OpenAI** rodando 100% localmente.
+
+- **100% Local** - Sem custos de API ou envio de dados para nuvem
+- **Multiplos Formatos** - MP4, AVI, MOV, MKV, MP3, WAV e mais
+- **Processamento em Lote** - Transcreva multiplos videos automaticamente
+- **Timestamps Precisos** - Cada segmento com marcacao de tempo
+- **Markdown para Obsidian** - Formatacao otimizada para second brain
+- **90+ Idiomas** - Portugues, Ingles, Espanhol e outros
+
+---
+
+## Instalacao
+
+### Requisitos
+
+- Python 3.8+
+- FFmpeg instalado no sistema
+
+### Passos
 
 ```bash
-# Clone ou baixe este repositório
+# 1. Entrar na pasta do projeto
 cd transcricao_local
 
-# Criar ambiente virtual
+# 2. Criar e ativar ambiente virtual
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-# venv\Scripts\activate  # Windows
+# venv\Scripts\activate   # Windows
 
-# Instalar dependências
-pip install openai-whisper ffmpeg-python
+# 3. Instalar dependencias
+pip install -r requirements.txt
 
-# Instalar FFmpeg (se ainda não tiver)
+# 4. Instalar FFmpeg (se nao tiver)
 # Ubuntu/Debian: sudo apt install ffmpeg
 # Mac: brew install ffmpeg
-# Windows: baixar de https://ffmpeg.org/download.html
+# Windows: https://ffmpeg.org/download.html
 ```
 
-### 2. Transcrever Seu Primeiro Vídeo
+Ou use o instalador automatico: `./instalar.sh`
+
+---
+
+## Uso Basico
+
+### Transcrever um video
 
 ```bash
-python transcricao_videos.py \
-  --input seu_video.mp4 \
-  --output transcricoes/
+python transcricao_videos.py -i video.mp4 -o transcricoes/
 ```
 
-**Pronto!** Suas transcrições estarão em `transcricoes/` em 3 formatos:
+### Transcrever pasta inteira
+
+```bash
+python transcricao_videos.py -i videos/ -o transcricoes/
+```
+
+### Com modelo mais preciso (recomendado para portugues)
+
+```bash
+python transcricao_videos.py -i video.mp4 -o transcricoes/ -m medium
+```
+
+### Saida gerada
+
+Para cada video, sao criados 3 arquivos:
 - `.md` - Markdown formatado (Obsidian)
 - `.txt` - Texto puro
 - `.json` - Dados completos com metadados
 
 ---
 
-## 📁 Estrutura do Projeto
+## Modelos Disponiveis
 
-```
-transcricao_local/
-├── transcricao_videos.py      # 🎯 Script principal de transcrição
-├── preprocessar_videos.py     # 🛠️ Utilitários de pré-processamento
-├── GUIA_USO.md                # 📖 Guia completo de uso
-├── README.md                  # 📄 Este arquivo
-├── requirements.txt           # 📦 Dependências Python
-└── exemplos/                  # 💡 Exemplos de uso
-    ├── transcricao_basica.sh
-    ├── transcricao_lote.sh
-    └── workflow_completo.sh
+| Modelo | RAM | Velocidade | Quando Usar |
+|--------|-----|------------|-------------|
+| `tiny` | ~1GB | Muito rapido | Testes |
+| `base` | ~1GB | Rapido | **Uso geral** |
+| `small` | ~2GB | Medio | Boa precisao |
+| `medium` | ~5GB | Lento | **Portugues BR** |
+| `large` | ~10GB | Muito lento | Maxima precisao |
+
+**Recomendacao:** Comece com `base`. Use `medium` para trabalho serio em portugues.
+
+---
+
+## Utilitarios de Pre-processamento
+
+O script `preprocessar_videos.py` oferece ferramentas adicionais:
+
+```bash
+# Ver informacoes do video
+python preprocessar_videos.py info -i video.mp4
+
+# Extrair audio (melhora performance)
+python preprocessar_videos.py extrair -i video.mp4 -o audios/
+
+# Limpar audio (remove ruido)
+python preprocessar_videos.py limpar -i audio.wav -o audios_limpos/
+
+# Dividir video longo em partes de 20 minutos
+python preprocessar_videos.py dividir -i video_longo.mp4 -o chunks/ -d 20
 ```
 
 ---
 
-## 🎮 Casos de Uso
+## Tempos Estimados (CPU)
 
-### 1. Transcrever Vídeos de Curso
-
-```bash
-python transcricao_videos.py \
-  --input "Curso Completo/videos/" \
-  --output "Curso Completo/transcricoes/" \
-  --modelo medium
-```
-
-### 2. Extrair Insights de Reuniões
-
-```bash
-# Extrair áudio primeiro (melhor performance)
-python preprocessar_videos.py extrair \
-  --input reuniao.mp4 \
-  --output audios/
-
-# Transcrever
-python transcricao_videos.py \
-  --input audios/reuniao.wav \
-  --output transcricoes/
-```
-
-### 3. Dividir e Transcrever Vídeos Longos
-
-```bash
-# Dividir em chunks de 20 minutos
-python preprocessar_videos.py dividir \
-  --input video_3h.mp4 \
-  --output chunks/ \
-  --duracao 20
-
-# Transcrever todos os chunks
-python transcricao_videos.py \
-  --input chunks/ \
-  --output transcricoes/
-```
-
-### 4. Pipeline Completo (Produção)
-
-```bash
-# 1. Ver informações dos vídeos
-python preprocessar_videos.py info --input videos/
-
-# 2. Extrair e limpar áudios
-python preprocessar_videos.py extrair --input videos/ --output audios/
-python preprocessar_videos.py limpar --input audios/ --output audios_limpos/
-
-# 3. Transcrever com modelo preciso
-python transcricao_videos.py \
-  --input audios_limpos/ \
-  --output transcricoes/ \
-  --modelo medium
-
-# 4. Copiar para Obsidian
-cp transcricoes/*.md ~/Obsidian/MeuVault/Transcricoes/
-```
-
----
-
-## 🎯 Modelos Whisper
-
-| Modelo | RAM | Velocidade | Precisão | Quando Usar |
-|--------|-----|------------|----------|-------------|
-| `tiny` | ~1GB | ⚡⚡⚡⚡ | ⭐⭐ | Testes rápidos |
-| `base` | ~1GB | ⚡⚡⚡ | ⭐⭐⭐ | **Uso geral** (recomendado) |
-| `small` | ~2GB | ⚡⚡ | ⭐⭐⭐⭐ | Boa precisão |
-| `medium` | ~5GB | ⚡ | ⭐⭐⭐⭐⭐ | **Português BR** (melhor) |
-| `large` | ~10GB | 🐌 | ⭐⭐⭐⭐⭐ | Máxima precisão |
-
-**Recomendação:** 
-- Comece com `base` para testar
-- Use `medium` para trabalho sério em português
-- Reserve `large` para casos críticos
-
----
-
-## 📊 Performance Esperada
-
-### Tempos de Transcrição (CPU i5/Ryzen 5)
-
-| Duração Vídeo | Modelo Base | Modelo Medium |
+| Duracao Video | Modelo Base | Modelo Medium |
 |---------------|-------------|---------------|
 | 10 minutos | 2-3 min | 5-8 min |
 | 30 minutos | 6-10 min | 15-20 min |
 | 1 hora | 12-20 min | 30-40 min |
 | 2 horas | 25-40 min | 60-80 min |
 
-**Com GPU (CUDA):** Até 3-5x mais rápido!
+**Com GPU NVIDIA:** Ate 5x mais rapido.
 
 ---
 
-## 🛠️ Ferramentas Incluídas
+## Exemplos Praticos
 
-### 1. `transcricao_videos.py` - Transcritor Principal
+### Transcrever curso completo
 
 ```bash
-# Ver todas as opções
-python transcricao_videos.py --help
-
-# Exemplos
-python transcricao_videos.py -i video.mp4 -o output/
-python transcricao_videos.py -i videos/ -o output/ -m medium
-python transcricao_videos.py -i video.mp4 -o output/ -l en
-```
-
-### 2. `preprocessar_videos.py` - Utilitários
-
-```bash
-# Ver todas as opções
-python preprocessar_videos.py --help
-
-# Operações disponíveis
-extrair  - Extrair áudio de vídeos
-limpar   - Limpar e normalizar áudio
-dividir  - Dividir vídeos longos
-info     - Ver metadados de vídeos
-```
-
----
-
-## 🎨 Exemplo de Saída
-
-### Markdown Gerado (`.md`)
-
-```markdown
-# 📹 aula_python_avancado
-
----
-
-## 📊 Metadados
-
-| Campo | Valor |
-|-------|-------|
-| **Arquivo Original** | `aula_python_avancado.mp4` |
-| **Data Transcrição** | 2025-11-12 10:30:00 |
-| **Duração** | 1:23:45 |
-| **Idioma** | pt |
-| **Segmentos** | 342 |
-
----
-
-## 📝 Transcrição Completa
-
-[Texto completo aqui...]
-
----
-
-## ⏱️ Transcrição com Timestamps
-
-**[00:00:00 → 00:00:15]**
-Olá pessoal, bem-vindos à aula de Python avançado...
-
-**[00:00:15 → 00:00:32]**
-Hoje vamos falar sobre decoradores e metaclasses...
-```
-
----
-
-## ⚙️ Configuração Avançada
-
-### Acelerar com GPU (Opcional)
-
-Se você tem GPU NVIDIA:
-
-```bash
-# Instalar PyTorch com CUDA
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-
-# Whisper detectará automaticamente a GPU
-python transcricao_videos.py -i video.mp4 -o output/
-```
-
-### Integração com Obsidian
-
-Adicione ao seu workflow:
-
-```bash
-# Configurar output direto para Obsidian
-OBSIDIAN_PATH="$HOME/Obsidian/MeuVault"
-
 python transcricao_videos.py \
-  --input videos/ \
-  --output "$OBSIDIAN_PATH/Transcricoes/"
+  -i "Curso Python/videos/" \
+  -o "Curso Python/transcricoes/" \
+  -m medium
 ```
 
-### Automação com Cron (Linux/Mac)
+### Pipeline completo para video longo
 
 ```bash
-# Editar crontab
-crontab -e
+# 1. Dividir video de 3h em partes de 30min
+python preprocessar_videos.py dividir -i video_3h.mp4 -o chunks/ -d 30
 
-# Adicionar (executa todo dia às 2h da manhã)
-0 2 * * * cd /path/to/transcricao_local && python transcricao_videos.py -i videos/ -o transcricoes/
+# 2. Transcrever todas as partes
+python transcricao_videos.py -i chunks/ -o transcricoes/ -m medium
+
+# 3. Copiar para Obsidian
+cp transcricoes/*.md ~/Obsidian/MeuVault/
+```
+
+### Transcrever podcast
+
+```bash
+python transcricao_videos.py -i podcast.mp3 -o notas/ -m base
 ```
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
-### Problema: "FFmpeg not found"
+### FFmpeg not found
 
 ```bash
-# Verificar se está instalado
+# Verificar instalacao
 which ffmpeg  # Linux/Mac
 where ffmpeg  # Windows
 
-# Instalar se necessário
-# Ubuntu/Debian: sudo apt install ffmpeg
+# Instalar
+# Ubuntu: sudo apt install ffmpeg
 # Mac: brew install ffmpeg
 ```
 
-### Problema: Transcrição com muitos erros
+### Transcricao com muitos erros
 
-**Soluções:**
-1. Usar modelo maior: `--modelo medium` ou `--modelo large`
-2. Limpar áudio antes: `python preprocessar_videos.py limpar`
-3. Verificar qualidade do áudio original
+1. Usar modelo maior: `-m medium` ou `-m large`
+2. Limpar audio primeiro: `preprocessar_videos.py limpar`
+3. Verificar qualidade do audio original
 
-### Problema: Muito lento
+### Muito lento
 
-**Soluções:**
-1. Usar modelo menor: `--modelo tiny` ou `--modelo base`
-2. Extrair áudio primeiro: `preprocessar_videos.py extrair`
+1. Usar modelo menor: `-m tiny` ou `-m base`
+2. Extrair audio primeiro: `preprocessar_videos.py extrair`
 3. Instalar CUDA se tiver GPU NVIDIA
-4. Dividir vídeo em partes menores
+4. Dividir video em partes menores
 
-### Problema: Falta de memória
+### Falta de memoria
 
-**Soluções:**
 1. Usar modelo menor
-2. Processar vídeos individualmente (não em lote)
-3. Dividir vídeos longos antes de transcrever
+2. Processar videos um por vez (nao em lote)
+3. Dividir videos longos antes de transcrever
 
 ---
 
-## 📚 Recursos Adicionais
+## Estrutura do Projeto
 
-- **[GUIA_USO.md](GUIA_USO.md)** - Guia detalhado com mais exemplos
-- **[Documentação Whisper](https://github.com/openai/whisper)** - Repositório oficial
-- **[FFmpeg Guide](https://ffmpeg.org/documentation.html)** - Documentação FFmpeg
-
----
-
-## 🎯 Próximos Passos
-
-Depois de dominar o básico:
-
-1. **Integre com IA** - Use as transcrições como input para análise com LLMs
-2. **Crie Workflows** - Automatize todo o processo
-3. **Analise Padrões** - Use as transcrições para extrair insights
-4. **Second Brain** - Organize no Obsidian com tags e links
-
----
-
-## 💡 Dicas Pro
-
-### 1. Processamento Noturno
-
-Configure para transcrever enquanto dorme:
-
-```bash
-# Script simples
-#!/bin/bash
-cd ~/transcricao_local
-source venv/bin/activate
-python transcricao_videos.py -i ~/videos_novos/ -o ~/transcricoes/ -m medium
 ```
-
-### 2. Backup Automático
-
-```bash
-# Após transcrever, fazer backup
-python transcricao_videos.py -i videos/ -o transcricoes/
-tar -czf backup_$(date +%Y%m%d).tar.gz transcricoes/
-```
-
-### 3. Notificações
-
-```bash
-# Linux
-python transcricao_videos.py -i videos/ -o out/ && notify-send "Pronto!"
-
-# Mac  
-python transcricao_videos.py -i videos/ -o out/ && osascript -e 'display notification "Pronto!"'
+transcricao_local/
+├── transcricao_videos.py   # Script principal
+├── preprocessar_videos.py  # Utilitarios
+├── requirements.txt        # Dependencias
+├── instalar.sh             # Instalador automatico
+├── exemplos/               # Scripts de exemplo
+└── CONTRIBUTING.md         # Guia de contribuicao
 ```
 
 ---
 
-## 🤝 Contribuindo
+## Acelerar com GPU (Opcional)
 
-Melhorias são bem-vindas! Áreas de interesse:
+Se tiver GPU NVIDIA:
 
-- [ ] Interface gráfica (GUI)
-- [ ] Suporte a mais idiomas
-- [ ] Integração com mais ferramentas
-- [ ] Otimizações de performance
-- [ ] Análise de sentimentos
-- [ ] Sumarização automática
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+```
 
----
-
-## 📄 Licença
-
-Este projeto é de código aberto e disponível para uso pessoal e comercial.
+O Whisper detectara automaticamente a GPU.
 
 ---
 
-## 👨‍💻 Autor
+## Referencia Rapida
 
-**Diego Sottani**  
-Arquiteto de Sistemas | INTJ-A  
-*"Transformando complexidade em clareza"*
+### Transcricao
+
+```bash
+python transcricao_videos.py -i video.mp4 -o out/           # Um video
+python transcricao_videos.py -i videos/ -o out/             # Pasta
+python transcricao_videos.py -i video.mp4 -o out/ -m medium # Modelo
+python transcricao_videos.py -i video.mp4 -o out/ -l en     # Idioma
+```
+
+### Pre-processamento
+
+```bash
+python preprocessar_videos.py info -i video.mp4             # Info
+python preprocessar_videos.py extrair -i video.mp4 -o out/  # Extrair audio
+python preprocessar_videos.py limpar -i audio.wav -o out/   # Limpar audio
+python preprocessar_videos.py dividir -i video.mp4 -o out/ -d 20  # Dividir
+```
+
+### Atalhos (opcional)
+
+Adicionar ao `~/.bashrc`:
+
+```bash
+alias transcrever='python ~/transcricao_local/transcricao_videos.py'
+alias prepvideo='python ~/transcricao_local/preprocessar_videos.py'
+```
 
 ---
 
-## 🌟 Agradecimentos
+## Links
 
-- OpenAI pela criação do Whisper
-- Comunidade Python
-- Todos que contribuíram com feedback
-
----
-
-**💡 Lembre-se:** Este sistema roda 100% localmente. Suas transcrições nunca saem do seu computador!
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Como contribuir
+- [Whisper (OpenAI)](https://github.com/openai/whisper) - Documentacao oficial
 
 ---
 
-*Última atualização: Novembro 2025*
+## Licenca
+
+Codigo aberto para uso pessoal e comercial.
+
+---
+
+*Desenvolvido por Diego Sottani - "Transformando complexidade em clareza"*
