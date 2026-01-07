@@ -55,19 +55,19 @@ Ou use o instalador automatico: `./instalar.sh`
 ### Transcrever um video
 
 ```bash
-python transcricao_videos.py -i video.mp4 -o transcricoes/
+python transcrever.py -i video.mp4 -o transcricoes/
 ```
 
 ### Transcrever pasta inteira
 
 ```bash
-python transcricao_videos.py -i videos/ -o transcricoes/
+python transcrever.py -i videos/ -o transcricoes/
 ```
 
 ### Com modelo mais preciso (recomendado para portugues)
 
 ```bash
-python transcricao_videos.py -i video.mp4 -o transcricoes/ -m medium
+python transcrever.py -i video.mp4 -o transcricoes/ -m medium
 ```
 
 ### Saida gerada
@@ -131,7 +131,7 @@ python preprocessar_videos.py dividir -i video_longo.mp4 -o chunks/ -d 20
 ### Transcrever curso completo
 
 ```bash
-python transcricao_videos.py \
+python transcrever.py \
   -i "Curso Python/videos/" \
   -o "Curso Python/transcricoes/" \
   -m medium
@@ -144,7 +144,7 @@ python transcricao_videos.py \
 python preprocessar_videos.py dividir -i video_3h.mp4 -o chunks/ -d 30
 
 # 2. Transcrever todas as partes
-python transcricao_videos.py -i chunks/ -o transcricoes/ -m medium
+python transcrever.py -i chunks/ -o transcricoes/ -m medium
 
 # 3. Copiar para Obsidian
 cp transcricoes/*.md ~/Obsidian/MeuVault/
@@ -153,7 +153,7 @@ cp transcricoes/*.md ~/Obsidian/MeuVault/
 ### Transcrever podcast
 
 ```bash
-python transcricao_videos.py -i podcast.mp3 -o notas/ -m base
+python transcrever.py -i podcast.mp3 -o notas/ -m base
 ```
 
 ---
@@ -197,7 +197,7 @@ where ffmpeg  # Windows
 
 ```
 transcricao_local/
-├── transcricao_videos.py   # Script principal
+├── transcrever.py   # Script principal
 ├── preprocessar_videos.py  # Utilitarios
 ├── requirements.txt        # Dependencias
 ├── instalar.sh             # Instalador automatico
@@ -224,10 +224,10 @@ O Whisper detectara automaticamente a GPU.
 ### Transcricao
 
 ```bash
-python transcricao_videos.py -i video.mp4 -o out/           # Um video
-python transcricao_videos.py -i videos/ -o out/             # Pasta
-python transcricao_videos.py -i video.mp4 -o out/ -m medium # Modelo
-python transcricao_videos.py -i video.mp4 -o out/ -l en     # Idioma
+python transcrever.py -i video.mp4 -o out/           # Um video
+python transcrever.py -i videos/ -o out/             # Pasta
+python transcrever.py -i video.mp4 -o out/ -m medium # Modelo
+python transcrever.py -i video.mp4 -o out/ -l en     # Idioma
 ```
 
 ### Pre-processamento
@@ -244,7 +244,7 @@ python preprocessar_videos.py dividir -i video.mp4 -o out/ -d 20  # Dividir
 Adicionar ao `~/.bashrc`:
 
 ```bash
-alias transcrever='python ~/transcricao_local/transcricao_videos.py'
+alias transcrever='python ~/transcricao_local/transcrever.py'
 alias prepvideo='python ~/transcricao_local/preprocessar_videos.py'
 ```
 

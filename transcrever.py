@@ -28,6 +28,8 @@ class TranscritorVideos:
     }
     
     EXTENSOES_VIDEO = {'.mp4', '.avi', '.mov', '.mkv', '.flv', '.wmv', '.webm'}
+    EXTENSOES_AUDIO = {'.mp3', '.wav', '.m4a', '.flac', '.ogg'}
+    EXTENSOES_SUPORTADAS = EXTENSOES_VIDEO | EXTENSOES_AUDIO
     
     def __init__(self, modelo='base', idioma='pt'):
         """
@@ -189,26 +191,26 @@ class TranscritorVideos:
             input_dir: Diretório com vídeos
             output_dir: Diretório para salvar transcrições
         """
-        # Buscar vídeos
-        videos = []
-        for ext in self.EXTENSOES_VIDEO:
-            videos.extend(Path(input_dir).glob(f"*{ext}"))
-        
-        if not videos:
-            print(f"❌ Nenhum vídeo encontrado em {input_dir}")
+        # Buscar vídeos e áudios
+        arquivos = []
+        for ext in self.EXTENSOES_SUPORTADAS:
+            arquivos.extend(Path(input_dir).glob(f"*{ext}"))
+
+        if not arquivos:
+            print(f"❌ Nenhum arquivo de mídia encontrado em {input_dir}")
             return
-        
+
         print(f"\n{'='*60}")
-        print(f"🎯 Encontrados {len(videos)} vídeos para transcrever")
+        print(f"🎯 Encontrados {len(arquivos)} arquivos para transcrever")
         print(f"{'='*60}")
         
-        # Processar cada vídeo
+        # Processar cada arquivo
         sucesso = 0
         falhas = 0
-        
-        for i, video in enumerate(videos, 1):
-            print(f"\n📊 Progresso: {i}/{len(videos)}")
-            if self.transcrever_video(str(video), output_dir):
+
+        for i, arquivo in enumerate(arquivos, 1):
+            print(f"\n📊 Progresso: {i}/{len(arquivos)}")
+            if self.transcrever_video(str(arquivo), output_dir):
                 sucesso += 1
             else:
                 falhas += 1

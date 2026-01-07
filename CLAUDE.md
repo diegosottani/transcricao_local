@@ -12,7 +12,7 @@ Sistema de transcricao local de videos usando Whisper (OpenAI). Processa videos/
 
 ```
 transcricao_local/
-├── transcricao_videos.py    # Script principal - classe TranscritorVideos
+├── transcrever.py    # Script principal - classe TranscritorVideos
 ├── preprocessar_videos.py   # Utilitarios - classe PreProcessadorVideo
 ├── requirements.txt         # Dependencias Python
 ├── instalar.sh              # Script de instalacao automatica
@@ -28,7 +28,7 @@ transcricao_local/
 
 ## Arquivos Principais
 
-### transcricao_videos.py
+### transcrever.py
 
 - **Classe:** `TranscritorVideos`
 - **Funcao:** Transcreve videos usando Whisper
@@ -36,7 +36,7 @@ transcricao_local/
   - `transcrever_video(video_path, output_dir)` - Transcreve um video
   - `transcrever_lote(input_dir, output_dir)` - Transcreve pasta inteira
   - `_gerar_markdown()` - Formata saida para Obsidian
-- **CLI:** `python transcricao_videos.py -i <input> -o <output> -m <modelo> -l <idioma>`
+- **CLI:** `python transcrever.py -i <input> -o <output> -m <modelo> -l <idioma>`
 
 ### preprocessar_videos.py
 
@@ -73,7 +73,7 @@ transcricao_local/
 source venv/bin/activate
 
 # Testar transcricao
-python transcricao_videos.py -i video.mp4 -o out/ -m tiny
+python transcrever.py -i video.mp4 -o out/ -m tiny
 
 # Ver info de video
 python preprocessar_videos.py info -i video.mp4
